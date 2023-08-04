@@ -1,0 +1,18 @@
+<h2>Directives excercise</h2>
+<hr />
+
+<button type="button" class="btn btn-primary" (click)="onToggleDetails()">
+  {{ showDetails ? "Hide" : "Display" }} Details
+</button>
+<p *ngIf="showDetails">Secret Password = tuna</p>
+
+<div>
+  <p
+    *ngFor="let click of clicks"
+    [ngStyle]="{ backgroundColor: click.serial >= 5 ? 'blue' : 'none' }"
+    [ngClass]="{ 'white-text': click.serial >= 5 }"
+  >
+    {{ click.serial }}: {{ click.time }} | Show Details:
+    {{ click.showDetails.toString() }}
+  </p>
+</div>
