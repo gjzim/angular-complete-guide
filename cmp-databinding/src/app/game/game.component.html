@@ -31,4 +31,17 @@
       </ol>
     </div>
   </div>
+
+  <hr>
+
+  <div class="row">
+    <app-game-controller (gameStarted)="onGameStarted($event)"></app-game-controller>
+
+    <ul class="game">
+      <li *ngFor="let comp of components">
+        <app-odd [roundNum]="comp.roundNum.toString()" *ngIf="comp.type === 'odd'"></app-odd>
+        <app-even [roundNum]="comp.roundNum.toString()" *ngIf="comp.type === 'even'"></app-even>
+      </li>
+    </ul>
+  </div>
 </div>
