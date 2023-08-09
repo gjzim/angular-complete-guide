@@ -1,0 +1,8 @@
+ul.game {
+  display: flex;
+}
+
+ul.game li {
+  list-style: none;
+  margin-right: 5px;
+}

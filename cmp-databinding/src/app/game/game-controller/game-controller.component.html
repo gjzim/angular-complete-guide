@@ -1,0 +1,4 @@
+<div class="row text-center">
+  <button class="btn btn-primary" type="button" (click)="onGameStart()" [disabled]="intervalRef !== undefined">Start</button> &nbsp;
+  <button class="btn btn-danger" type="button" (click)="onGameStop()" [disabled]="intervalRef === undefined">Stop</button>
+</div>

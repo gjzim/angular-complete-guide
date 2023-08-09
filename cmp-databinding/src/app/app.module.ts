@@ -9,6 +9,7 @@ import { ServerElementComponent } from './server-element/server-element.componen
 import { GameComponent } from './game/game.component';
 import { OddComponent } from './game/odd/odd.component';
 import { EvenComponent } from './game/even/even.component';
+import { GameControllerComponent } from './game/game-controller/game-controller.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EvenComponent } from './game/even/even.component';
     ServerElementComponent,
     GameComponent,
     OddComponent,
-    EvenComponent
+    EvenComponent,
+    GameControllerComponent
   ],
   imports: [
     BrowserModule,
