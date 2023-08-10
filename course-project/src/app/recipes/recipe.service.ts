@@ -1,19 +1,26 @@
 import { EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
 
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
     new Recipe(
-      'A Test Recipe',
-      'This is simply a test recipe.',
-      'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80'
+      'Burger',
+      'A tasty burger.',
+      'https://hips.hearstapps.com/hmg-prod/images/turkey-burger-index-64873e8770b34.jpg',
+      [new Ingredient('Meat', 1), new Ingredient('Buns', 2)]
     ),
     new Recipe(
-      'A Test Recipe #2',
-      'This is simply a test recipe #2.',
-      'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80'
+      'Pizza',
+      'Newyork style pizza.',
+      'https://www.biggerbolderbaking.com/wp-content/uploads/2021/02/New-York-Style-Pizza-Thumbnail1-scaled.jpg',
+      [
+        new Ingredient('Pizza Dough', 1),
+        new Ingredient('Meat slices', 3),
+        new Ingredient('Tomato sauce', 1),
+      ]
     ),
   ];
 
