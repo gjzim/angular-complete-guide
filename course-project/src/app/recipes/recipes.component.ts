@@ -9,14 +9,4 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipes.component.css'],
   providers: [RecipeService],
 })
-export class RecipesComponent implements OnInit {
-  selectedRecipe: Recipe | undefined = undefined;
-
-  constructor(private recipeService: RecipeService) {}
-
-  ngOnInit(): void {
-    this.recipeService.recipeSelected.subscribe(
-      (recipe) => (this.selectedRecipe = recipe)
-    );
-  }
-}
+export class RecipesComponent {}
