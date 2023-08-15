@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <h2>Form exercise</h2>
+            <hr>
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                            type="email"
+                            id="email"
+                            class="form-control"
+                            ngModel
+                            name="email"
+                            email
+                            required
+                            #emailField="ngModel"
+                    />
+                    <p *ngIf="emailField.touched && emailField.invalid">Please input a valid email</p>
+                </div>
+                <div class="form-group">
+                    <label for="subscription">Subscription</label>
+                    <select id="subscription" name="subscription" class="form-control" [ngModel]="selectedSubscription">
+                        <option value="basic">Basic</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="pro">Pro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            ngModel
+                            name="password"
+                            required
+                            #passwordField="ngModel"
+                    />
+                    <p *ngIf="passwordField.touched && passwordField.invalid">Please input a valid password</p>
+                </div>
+
+                <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+                    Submit
+                </button>
+            </form>
+
+            <hr>
+
+            <pre *ngIf="f.submitted && f.valid" [textContent]="formValues" ></pre>
+        </div>
+    </div>
+</div>
