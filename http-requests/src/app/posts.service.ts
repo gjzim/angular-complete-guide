@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, Subject, tap, throwError } from 'rxjs';
 import { Post } from './post.model';
 
 @Injectable({
@@ -17,6 +17,9 @@ export class PostsService {
         {
           title,
           content,
+        },
+        {
+          observe: 'response',
         }
       )
       .subscribe({
@@ -28,7 +31,16 @@ export class PostsService {
   fetchPosts() {
     return this.http
       .get<{ [key: string]: Post }>(
-        'https://angular-complete-guide-61789-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
+        'https://angular-complete-guide-61789-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+        {
+          // params: new HttpParams()
+          //   .append('print', 'pretty')
+          //   .append('test', 'what'),
+          // headers: new HttpHeaders({
+          //   'Custom-Header': 'Hello',
+          // }),
+          responseType: 'json',
+        }
       )
       .pipe(
         map((responseData) => {
@@ -40,13 +52,25 @@ export class PostsService {
             });
           }
           return postsArray;
+        }),
+        catchError((error) => {
+          return throwError(() => error);
         })
       );
   }
 
   deleteAllPosts() {
-    return this.http.delete(
-      'https://angular-complete-guide-61789-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
-    );
+    return this.http
+      .delete(
+        'https://angular-complete-guide-61789-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+        {
+          observe: 'events',
+        }
+      )
+      .pipe(
+        tap((event) => {
+          console.log(event);
+        })
+      );
   }
 }
