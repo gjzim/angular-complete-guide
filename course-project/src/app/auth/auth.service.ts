@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface AuthResponse {
   kind: string;
@@ -20,7 +21,7 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponse>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDx183XSOGrDbn-MQjx2tplE14H_WA5y3o',
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASE_API_KEY}`,
         { email, password, returSecureToken: true }
       )
       .pipe(
