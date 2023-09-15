@@ -13,4 +13,24 @@ export class User {
 
     return this._token;
   }
+
+  get tokenTimeRemaining() {
+    return this._tokenExpirationDate.getTime() - new Date().getTime();
+  }
+
+  static fromString(userDataSerialized: string): User {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(userDataSerialized);
+
+    return new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+  }
 }

@@ -24,23 +24,18 @@ export class DataSorageService {
   }
 
   fetchRecipes() {
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get<Recipe[]>(
-          'https://ngcg-recipe-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json',
-          {
-            params: new HttpParams().set('auth', user?.token || ''),
-          }
-        );
-      }),
-      map((recipes) =>
-        recipes.map((recipe) => ({
-          ...recipe,
-          ingredients: recipe.ingredients || [],
-        }))
-      ),
-      tap((recipes) => this.recipeService.setRecipes(recipes))
-    );
+    return this.http
+      .get<Recipe[]>(
+        'https://ngcg-recipe-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json'
+      )
+      .pipe(
+        map((recipes) =>
+          recipes?.map((recipe) => ({
+            ...recipe,
+            ingredients: recipe.ingredients || [],
+          }))
+        ),
+        tap((recipes) => this.recipeService.setRecipes(recipes))
+      );
   }
 }
